@@ -113,3 +113,66 @@ db.miApp.update(
       $rename: {"firstName": "PrimerNombre"}
     }
   )
+  //para eliminar datos
+
+  db.miApp.remove(
+      {"PrimerNombre":"tesla"}
+  )
+  // solo uno para remover si tenemos dos datos iguales
+    db.miApp.remove(
+        {"firtsName": "Paul"},
+        {justOne:true}
+        )
+//para busquedas mas complejas usamos #or
+
+
+db.miApp.find({
+    $or: [{
+        "firtsName": "Paul"
+    }, {
+        "firstName": "salam"
+    }]
+}
+)
+
+//insrtamos datos para trabajar con numeros
+db.miApp.insert(
+
+        [
+             {name:"Saul",age:34},
+             {name:"Salomon",age:44},
+             {
+                 name: "Saladin",
+                 age: 30
+             },
+             {
+                 name: "Sajusin",
+                 age: 24
+             }
+        ]
+
+)
+// para hacer busquedas mayor $gt  que o nemor que $lt
+
+db.miApp.find({age:{$lt:20}})
+db.miApp.find({age:{$gt:20}})
+db.miApp.find({age:{$gt:30, $lt:40}})
+
+//inserta un dato con un sub objeto
+
+db.miApp.insert(
+{firstName:"TETU",
+    address:{
+        city:"London"
+    }
+}
+)
+//ahora para buscar dentro de un objeto otro objeto
+db.miApp.find({
+"address.city":"London"
+})
+//para busquesdas mas complejas usamos expresiones regulares
+
+db.miApp.find({
+    name:{$regex:"Sa"}
+})
